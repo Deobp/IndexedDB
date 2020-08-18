@@ -1,14 +1,24 @@
-const request = indexedDB.open('notes', 5);
+let btn = document.getElementById('btn');
 
-request.onupgradeneeded = (e) => {
-    alert('upgrade is called')
-}
+btn.addEventListener('click', createDB)
 
-request.onsuccess = (e) => {
-    console.log(e)
-    alert('success is called')
-}
+function createDB() {
+    let database = document.getElementById('db');
+    let version = document.getElementById('version');
 
-request.onerror = (e) => {
-    alert('error')
+    const request = indexedDB.open(database.value, version.value);
+
+    request.onupgradeneeded = (e) => {
+        alert('version upgraded')
+
+    }
+
+    request.onsuccess = (e) => {
+        console.log(e)
+        alert('success is called')
+    }
+
+    request.onerror = (e) => {
+        alert('error')
+    }
 }
