@@ -25,14 +25,13 @@ request.onerror = (e) => {
 function writeIndexedDB(event) {
     let txWrite = db.transaction("claster", "readwrite");
     let access = txWrite.objectStore("claster");
-    txWrite.onerror = (e) => alert(`error: ${e.target.error}`);
     let obj = {
         value: input.value,
         date: new Date().getDate(),
     };
 
     access.add(obj);
-    show(input.value);
+    if (!arr.includes(input.value)) show(input.value);
     input.value = "";
     event.preventDefault(event);
 }
@@ -52,6 +51,7 @@ function readIndexedDB() {
         }
     };
 }
+
 
 function show(item) {
     let list = document.createElement("li");
